@@ -89,10 +89,20 @@ Now you are ready for training. As we explain during the course, the Tf Object D
 First, let's download the [pretrained model](http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz) and move it to `/home/workspace/experiments/pretrained_model/`.
 
 We need to edit the config files to change the location of the training and validation files, as well as the location of the label_map file, pretrained weights. We also need to adjust the batch size. To do so, run the following:
+
+__Update:__ added input file and output dir.
 ```
-python edit_config.py --train_dir /home/workspace/data/train/ --eval_dir /home/workspace/data/val/ --batch_size 2 --checkpoint /home/workspace/experiments/pretrained_model/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8/checkpoint/ckpt-0 --label_map /home/workspace/experiments/label_map.pbtxt
+python edit_config.py --train_dir data/train/ \
+        --eval_dir data/val/ \
+        --batch_size 2 \
+        --checkpoint experiments/pretrained_model/ssd_resnet152_v1_fpn_640x640_coco17_tpu-8/checkpoint/ckpt-0 \
+        --label_map experiments/label_map.pbtxt \
+        --input_file experiments/pretrained_model/ssd_resnet152_v1_fpn_640x640_coco17_tpu-8/pipeline.config \
+        --output_dir experiments/your_next_experiment
 ```
-A new config file has been created, `pipeline_new.config`.
+A new config file has been created, `experiments/your_next_experiment/pipeline.config`.
+
+__Important:__ Don't forget to update number of classes either in `model.ssd.num_classes` or `model.faster_rcnn.num_classes`, etc.
 
 ### Training
 
