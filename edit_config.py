@@ -28,6 +28,7 @@ def edit(train_dir, eval_dir, batch_size, checkpoint, label_map, input_file, out
     pipeline_config.train_config.batch_size = batch_size
     pipeline_config.train_config.fine_tune_checkpoint = checkpoint
     pipeline_config.fine_tune_checkpoint_type = 'detection'
+    pipeline_config.num_steps = 25000
     pipeline_config.train_input_reader.label_map_path = label_map
     pipeline_config.train_input_reader.tf_record_input_reader.input_path[:] = training_files
 
